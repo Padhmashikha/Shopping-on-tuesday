@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Shopping On Tuesday{% endblock %}
+
+{% block content %}
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="dashboard-welcome">
+            <h1>👋 Welcome, {{ current_user.username }}!</h1>
+            <p>Here's what's happening with your store today.</p>
+        </div>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-outline">Logout</a>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-info">
+                <h3>{{ total_products }}</h3>
+                <p>Total Products</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">🎌</div>
+            <div class="stat-info">
+                <h3>{{ anime_count }}</h3>
+                <p>Anime Products</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-info">
+                <h3>{{ stationery_count }}</h3>
+                <p>Stationery Items</p>
+            </div>
+        </div>
+        
+        <div class="stat-card {{ 'warning' if low_stock > 0 else '' }}">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-info">
+                <h3>{{ low_stock }}</h3>
+                <p>Low Stock</p>
+            </div>
+        </div>
+        
+        <div class="stat-card {{ 'danger' if out_of_stock > 0 else '' }}">
+            <div class="stat-icon">❌</div>
+            <div class="stat-info">
+                <h3>{{ out_of_stock }}</h3>
+                <p>Out of Stock</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <section class="dashboard-section">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="quick-actions">
+            <a href="{{ url_for('admin.add_product') }}" class="action-card">
+                <span class="action-icon">➕</span>
+                <span class="action-text">Add Product</span>
+            </a>
+            <a href="{{ url_for('admin.products_list') }}" class="action-card">
+                <span class="action-icon">📋</span>
+                <span class="action-text">View All Products</span>
+            </a>
+            <a href="{{ url_for('main.products') }}" class="action-card" target="_blank">
+                <span class="action-icon">👁️</span>
+                <span class="action-text">View Store</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Recent Products -->
+    <section class="dashboard-section">
+        <h2 class="section-title">Recent Products</h2>
+        {% if recent_products %}
+            <div class="recent-products-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in recent_products %}
+                            <tr>
+                                <td>#{{ product.id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>
+                                    <span class="category-tag {{ product.category }}">
+                                        {{ product.category|capitalize }}
+                                    </span>
+                                </td>
+                                <td>₹{{ product.price }}</td>
+                                <td>
+                                    {% if product.stock == 0 %}
+                                        <span class="stock-tag out-of-stock">Out of Stock</span>
+                                    {% elif product.stock < 5 %}
+                                        <span class="stock-tag low-stock">{{ product.stock }} left</span>
+                                    {% else %}
+                                        <span class="stock-tag in-stock">{{ product.stock }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty-message">No products yet. Add your first product!</p>
+        {% endif %}
+    </section>
+{% endblock %}
