@@ -41,6 +41,7 @@
             <p>&copy; 2024 Shopping On Tuesday. Anime & Stationery</p>
             
             <div class="footer-links">
+                <a href="#" id="reportBugLink">🐛 Report a Bug</a>
                 <a href="#" id="aboutLink">About Me</a>
                 <a href="https://instagram.com/blu3_bird_" target="_blank">Instagram</a>
                 <a href="https://github.com/blu3-bird" target="_blank">GitHub</a>
@@ -114,6 +115,45 @@
         </div>
     </div>
 </div>
+<!-- Report Bug Modal -->
+<div id="reportBugModal" class="modal bug-modal">
+    <div class="modal-content bug-modal-content">
+        <button class="close-modal" onclick="closeBugModal()">&times;</button>
+        
+        <div class="modal-header bug-header">
+            <p class="bug-symbol">🐛</p>
+            <p class="bug-header-text">Report A Bug</p>
+        </div>
+        
+        <div class="modal-body">
+            <div class="bug-description">
+                <label for="describe-bug-area" class="bug-describe-request">What went wrong?</label>
+                <textarea class="bug-describe-area" id="describe-bug-area" placeholder="Describe the bug"></textarea>
+            </div>
+            <div class="where-happen">
+                <label class="where-happen-text" for="where-happen-area">Where did this happen?</label>
+                <textarea class="where-happen-area" id="where-happen-area" placeholder="link"></textarea>
+            </div>
+            <div class="attach-files">
+                <p class="attach-files-text">please attach any related files (screenshots, screen recordings, etc)</p>
+                <label for="file-upload" class="upload-label">Upload Files</label>
+                <input type="file" id="file-upload" class="file-input">
+            </div>
+
+            <div class="contact-info">
+                <label class="contact-info-request" for="contact-info-area">Please enter your contact info</label>
+                <input type="text" class="contact-info-area" id="contact-info-area" placeholder="Email adress, Phone number, etc">
+            </div>
+            
+            <div class="send-reprot">
+                <button class="send-button">Send Bug Report</button>
+            </div>
+            <p class="footer-quote">
+                Thank you for your assistance!
+            </p>
+        </div>
+    </div>
+</div>
     
     <!-- JavaScript for Modal (Minimal!) -->
     <script>
@@ -161,6 +201,23 @@
                 }
             });
         }
+        // bug report modal
+        document.getElementById('reportBugLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('reportBugModal').classList.add('active');
+        });
+        
+        // Close Modal
+        function closeBugModal() {
+            document.getElementById('reportBugModal').classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('reportBugModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBugModal();
+            }
+        });
     </script>
 </body>
 </html>
