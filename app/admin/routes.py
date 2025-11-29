@@ -2,9 +2,9 @@ from flask import redirect, render_template, flash, url_for
 from flask_login import login_required, current_user
 from app.admin import admin
 from app.models import Product
-from sqlalchemy.exc import DataError , OperationalError , IntegrityError
-from app.admin import ProductForm
-from app.models import db
+from sqlalchemy.exc import DataError , OperationalError , IntegrityError,SQLAlchemyError
+from app.admin.forms import ProductForm
+from app import db
 
 @admin.route('/')
 @login_required
@@ -31,7 +31,7 @@ def dashboard():
 
 @admin.route('/products')
 @login_required
-def products():
+def products_list():
     """
     Docstring for products
     """
@@ -39,7 +39,7 @@ def products():
     products=Product.query.order_by(Product.created_at.desc()).all()
     return render_template('admin/product_detail.html',products=products)
 
-@admin.route('/add-product', methods=['GET','POST'])
+@admin.route('/add-product', methods=['GET', 'POST'])
 @login_required
 def add_product():
     """
@@ -50,12 +50,12 @@ def add_product():
     if form.validate_on_submit():
 
         product = Product(
-            name=form.name.data,
-            price=form.price.data,
-            category=form.category.data,
-            stock=form.stock.data,
-            description=form.description.data,
-            image_url=form.image_url.data
+            name = form.name.data,
+            price = form.price.data,
+            category = form.category.data,
+            stock = form.stock.data,
+            description = form.description.data,
+            image_url = form.image_url.data
         )
 
         try:
@@ -95,15 +95,15 @@ def edit_product(product_id):
         product.price = form.price.data
         product.category = form.category.data
         product.stock = form.stock.data
-        product.description = form.stock.data
+        product.description = form.description.data
         product.image_url = form.image_url.data
 
         try:
             db.session.commit()
 
-            flash(f'Info Updated for Product: {product.name} has been updated!')
+            flash(f'Info Updated for Product: {product.name} has been updated!', 'success')
 
-            return redirect(url_for('admin.product_list'))
+            return redirect(url_for('admin.products_list'))
         except DataError as e:
             db.session.rollback()
 
@@ -122,3 +122,28 @@ def edit_product(product_id):
     return render_template('admin/edit_product.html', form=form, product=product)
 
 
+@admin.route('/delete-product/<int:product_id>',method=['POST'])
+@login_required
+def delete_product(product_id):
+    """delete product route"""
+
+    product = Product.query.get_or_404(product_id)
+
+    product.name = product.name
+
+    try:
+        db.session.delete(product)
+        db.session.commit()
+
+        flash(f'Product {product.name} is deleted successfully!','success')
+        return redirect(url_for('admin.products_list'))
+    except DataError as e:
+        db.session.rollback()
+        raise e
+    except OperationalError as e:
+        db.session.rollback()
+        raise e
+    except IntegrityError as e:
+        db.session.rollback()
+        raise e
+    
