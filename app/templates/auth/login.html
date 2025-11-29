@@ -23,7 +23,7 @@
             {% endwith %}
 
             <!-- Login Form -->
-            <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+            <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form" data-login-form>
                 {{ form.hidden_tag() }}
 
                 <!-- Username Field -->
@@ -60,7 +60,10 @@
 
                 <!-- Submit Button -->
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-large btn-block btn-primary") }}
+                    <button type="submit" class="btn btn-large btn-block btn-primary auth-submit" data-login-submit>
+                        <span class="btn-label">Log In</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
 
