@@ -1552,3 +1552,45 @@ footer {
     background: #fee2e2;
     color: #991b1b;
 }
+
+/* Loading Spinner Button */
+
+.auth-submit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Hidden by default */
+.btn-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    animation: btn-spin 0.6s linear infinite;
+}
+
+/* When loading, show spinner + modify button */
+.auth-submit.is-loading .btn-spinner {
+    display: inline-block;
+}
+
+.auth-submit.is-loading .btn-label {
+    opacity: 0.7;
+}
+
+.auth-submit.is-loading {
+    cursor: wait;
+    pointer-events: none;
+}
+
+/* Spinner Animation */
+@keyframes btn-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
