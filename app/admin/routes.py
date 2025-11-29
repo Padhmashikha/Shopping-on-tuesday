@@ -36,10 +36,10 @@ def products_list():
     Docstring for products
     """
 
-    products=Product.query.order_by(Product.created_at.desc()).all()
-    return render_template('admin/product_detail.html',products=products)
+    products = Product.query.order_by(Product.created_at.desc()).all()
+    return render_template('admin/product_detail.html',products = products)
 
-@admin.route('/add-product', methods=['GET', 'POST'])
+@admin.route('/add-product', methods = ['GET', 'POST'])
 @login_required
 def add_product():
     """
@@ -65,33 +65,24 @@ def add_product():
             flash(f'Product {product.name} has been successfully added', 'success')
 
             return redirect(url_for('admin.products_list'))
-        except DataError as e:
+        except (DataError, SQLAlchemyError, OperationalError, IntegrityError) as e:
             db.session.rollback()
+            flash(f'Something Went Wrong, Please try again','error')
+            return redirect(url_for(admin.add_product))
+    return render_template('admin/add_product.html', form = form)
 
-            raise e
-        except OperationalError as e:
-            db.session.rollback()
-
-            raise e
-        
-        except IntegrityError as e:
-            db.session.rollback()
-
-            raise e
-    return render_template('admin/add_product.html', form=form)
-
-@admin.route('/edit-product/<int: product_id>', methods=['GET','POST'])
+@admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
 @login_required
 def edit_product(product_id):
     """Edit product route"""
 
     product = Product.query.get_or_404(product_id)
 
-    form = ProductForm(obj=product)
+    form = ProductForm(obj = product)
 
     if form.validate_on_submit():
 
-        product.name=form.name.data
+        product.name = form.name.data
         product.price = form.price.data
         product.category = form.category.data
         product.stock = form.stock.data
@@ -104,46 +95,30 @@ def edit_product(product_id):
             flash(f'Info Updated for Product: {product.name} has been updated!', 'success')
 
             return redirect(url_for('admin.products_list'))
-        except DataError as e:
+        except (DataError, SQLAlchemyError, OperationalError, IntegrityError) as e:
             db.session.rollback()
-
-            raise e
-        
-        except IntegrityError as e:
-            db.session.rollback()
-
-            raise e
-        
-        except OperationalError as e:
-            db.session.rollback()
-
-            raise e
+            flash(f'Something went wrong, Please try again','error')
+            return redirect(url_for('admin.edit_product'))
         
     return render_template('admin/edit_product.html', form=form, product=product)
 
 
-@admin.route('/delete-product/<int:product_id>',method=['POST'])
+@admin.route('/delete-product/<int:product_id>',methods=['POST'])
 @login_required
 def delete_product(product_id):
     """delete product route"""
 
     product = Product.query.get_or_404(product_id)
 
-    product.name = product.name
+    product_name = product.name
 
     try:
         db.session.delete(product)
         db.session.commit()
 
-        flash(f'Product {product.name} is deleted successfully!','success')
+        flash(f'Product {product_name} is deleted successfully!','success')
         return redirect(url_for('admin.products_list'))
-    except DataError as e:
+    except (DataError, OperationalError, SQLAlchemyError, IntegrityError) as e:
         db.session.rollback()
-        raise e
-    except OperationalError as e:
-        db.session.rollback()
-        raise e
-    except IntegrityError as e:
-        db.session.rollback()
-        raise e
-    
+        flash('Something went wrong, Please try again','error')
+        return redirect(url_for('admin.products_list'))
