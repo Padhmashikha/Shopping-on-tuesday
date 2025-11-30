@@ -14,6 +14,7 @@ class Product(db.Model):
     description = db.Column(db.Text)
     stock = db.Column(db.Integer,default=1)
     category = db.Column(db.String(50), nullable=False)
+    image_url = db.Column(db.String(255))
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
