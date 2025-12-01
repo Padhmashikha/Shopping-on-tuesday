@@ -8,7 +8,7 @@ class ProductForm(FlaskForm):
 
     price = FloatField('Price of Product',validators=[DataRequired(message='Price is required'),NumberRange(min=1, message='Price of Product cant be negative')])
 
-    category = SelectField('Product Category',choices=[('anime','Anime'),('stationary','Stationary')],validators=[DataRequired(message='Category of product is required')])
+    category = SelectField('Product Category',choices=[('anime','Anime'),('stationery','Stationery')],validators=[DataRequired(message='Category of product is required')])
 
     stock = IntegerField('Stock',validators=[DataRequired(message='Stock is empty'),NumberRange(min=0, message='Stock cannot be negative')])
 

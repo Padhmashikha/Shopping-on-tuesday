@@ -15,7 +15,7 @@ def dashboard():
 
     total_products=Product.query.count()
     anime_count=Product.query.filter_by(category='anime').count()
-    stationary_count = Product.query.filter_by(category='stationary').count()
+    stationery_count = Product.query.filter_by(category='stationery').count()
     low_stock=Product.query.filter(Product.stock <3).count()
     out_of_stock = Product.query.filter(Product.stock == 0).count()
 
@@ -24,7 +24,7 @@ def dashboard():
     return render_template('admin/dashboard.html',
                            total_products=total_products,
                            anime_count=anime_count,
-                           stationary_count=stationary_count,
+                           stationery_count=stationery_count,
                            low_stock=low_stock,
                            out_of_stock=out_of_stock,
                            recent_products=recent_products)
@@ -68,7 +68,7 @@ def add_product():
         except (DataError, SQLAlchemyError, OperationalError, IntegrityError) as e:
             db.session.rollback()
             flash(f'Something Went Wrong, Please try again','error')
-            return redirect(url_for(admin.add_product))
+            return redirect(url_for('admin.add_product'))
     return render_template('admin/add_product.html', form = form)
 
 @admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
@@ -98,7 +98,7 @@ def edit_product(product_id):
         except (DataError, SQLAlchemyError, OperationalError, IntegrityError) as e:
             db.session.rollback()
             flash(f'Something went wrong, Please try again','error')
-            return redirect(url_for('admin.edit_product'))
+            return redirect(url_for('admin.edit_product', product_id=product_id))
         
     return render_template('admin/edit_product.html', form=form, product=product)
 
