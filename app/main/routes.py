@@ -17,7 +17,7 @@ def products():
     return render_template ('main/products.html', products=all_products)
 
 
-@main.route('/product/<int:product_id>')
+@main.route('/products/<int:product_id>')
 def product_detail(product_id):
     """Product details route"""
 
