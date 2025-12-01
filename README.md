@@ -85,8 +85,20 @@ Contributions are welcome! Here's how you can help:
 
 Please ensure your code follows the project's style guidelines and includes tests where applicable.
 
+## Contributors ✨
+
+Thanks goes to these wonderful people:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## 📜 License
 
 This project is licensed under the MIT License.
 
 ---
+
