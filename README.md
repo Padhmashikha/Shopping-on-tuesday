@@ -96,6 +96,7 @@ Thanks goes to these wonderful people:
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/blu3-bird"><img src="https://avatars.githubusercontent.com/u/194448323?v=4?s=100" width="100px;" alt="Pardeep Singh"/><br /><sub><b>Pardeep Singh</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=blu3-bird" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MeloveGupta"><img src="https://avatars.githubusercontent.com/u/119809561?v=4?s=100" width="100px;" alt="Melove Gupta"/><br /><sub><b>Melove Gupta</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=MeloveGupta" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
