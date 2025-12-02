@@ -101,6 +101,7 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MeloveGupta"><img src="https://avatars.githubusercontent.com/u/119809561?v=4?s=100" width="100px;" alt="Melove Gupta"/><br /><sub><b>Melove Gupta</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=MeloveGupta" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rooqidev"><img src="https://avatars.githubusercontent.com/u/227508742?v=4?s=100" width="100px;" alt="Rooqidev"/><br /><sub><b>Rooqidev</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=rooqidev" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Padhmashikha"><img src="https://avatars.githubusercontent.com/u/219302428?v=4?s=100" width="100px;" alt="Padhmashikha Iyapparaju"/><br /><sub><b>Padhmashikha Iyapparaju</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=Padhmashikha" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MVGRAO"><img src="https://avatars.githubusercontent.com/u/134282307?v=4?s=100" width="100px;" alt="Venkata Gajapathi Rao Mugunda"/><br /><sub><b>Venkata Gajapathi Rao Mugunda</b></sub></a><br /><a href="https://github.com/blu3-bird/Shopping-on-tuesday/commits?author=MVGRAO" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
