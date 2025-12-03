@@ -64,6 +64,7 @@ class ProductForm(FlaskForm):
         Optional()
     ])
 
-    image_url = StringField('Image URL',validators=[Optional()])
+    image_url = StringField('Image URL',validators=[Optional()],
+                            render_kw={"placeholder": "https://i.postimg.cc/R032DzLF/8431562.jpg"})
 
     submit = SubmitField('Add Product')
